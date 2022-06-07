@@ -1,78 +1,26 @@
+let interes = 1.7;
+let monto = 0;
+let total = 0;
+let cuotas = 0;
 
-
-function mostrarMenu()
-{
-    let opcion = 0;
-    
-    while(opcion!==5)
-    {
-        opcion = Number(prompt(`Ingrese una opción: 
-                               1. SUMA
-                               2. RESTA
-                               3. MUL
-                               4. DIV
-                               5. FIN`));
-      let a =0;
-      let b=0;
-      if(opcion===1 || opcion===2 || opcion===3 || opcion===4)
-      {
-        a = Number(prompt("Ingrese un numero"));
-        b = Number(prompt("Ingrese otro numero"));
-      } 
-
-        switch(opcion)
-        {
-          
-          case 1:{
-              
-              sumar(a, b);
-              break;
-            }
-            case 2:{
-
-              restar(a, b);
-              break;
-            }
-            case 3:{
-              multiplicar(a, b);
-              break;
-            }
-            case 4:{
-              let res =dividir(a, b);
-              alert("DIV " +res);
-                break;
-            }
-            case 5:{
-              alert("Gracias por usar nuestros servicios")
-              break;
-            }
-            default: 
-            {
-                alert("Ingrese una opción válida")
-                break;
-            } 
-        }
+const pedirMonto = () => {
+    monto = Number(prompt("Ingrese el monto a solicitar para su credito (Minimo 5.000, Maximo 50.000"));
+    while (isNaN((monto)) || monto < 5000 || monto > 50000 ) {
+        monto = Number(prompt("Ingrese el monto que desea, entre 5.000 y 50.000."));
     }
 }
-function sumar(a,b)
-  {
-      alert("La suma es "+ (a+b));
-  }
 
-  function restar(a,b)
-  {
-    alert("La resta es "+(a-b));
-  }
-  function multiplicar(a,b)
-  {
-    alert("La  multiplciacion es "+(a*b));
-  }
-  function dividir(a,b)
-  {
-      let resultado = a/b;
-      return resultado;
-  }
+const pedirCuotas = () => {
+    cuotas = Number(prompt("¿En cuantas cuotas quiere pagar? 1-24"))
+    while (isNaN(cuotas) || cuotas > 24 || cuotas == 0) {
+        cuotas = Number(prompt("Ingrese en cuantas cuotas desea pagar, de 1 a 24"))
+    } 
+}
 
-
-  /*BLOQUE PRINICPAL */
-  mostrarMenu();
+const init = () => {
+    pedirMonto();   
+    pedirCuotas();
+      total = monto * interes/cuotas
+} 
+init();
+alert("Tu total a pagar durante" +" "+ cuotas +" "+ "meses, será de"+" "+ total +"$ARS")
